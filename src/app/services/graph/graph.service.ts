@@ -1,6 +1,23 @@
 import { Injectable } from '@angular/core';
 import { GraphDataService } from './graph-data.service';
 
+// TODO: Handle `null`.
+const deepMerge = (a, b) => {
+  const o = [
+    ...Object.keys(a),
+    ...Object.keys(b),
+  ].reduce((acc, key) => ({ ...acc, [key]: undefined }), {});
+
+  return Object.keys(o)
+    .reduce((acc, key) => {
+      if (key in a && !(key in b)) return { ...acc, [key]: a[key] };
+      if (key in b && !(key in a)) return { ...acc, [key]: b[key] };
+      if (typeof b[key] !== 'object') return { ...acc, [key]: b[key] };
+      if (Array.isArray(a[key]) && Array.isArray(b[key])) return { ...acc, [key]: [...a[key], ...b[key]] };
+      return { ...acc, [key]: deepMerge(a[key], b[key]) };
+    }, {});
+};
+
 // TODO: Type.
 declare var sigma: any;
 
@@ -47,5 +64,34 @@ export class GraphService {
       },
       container: 'graph-container',
     });
+  }
+
+  computeFilters() {
+    // TODO: Make configurable or externalize.
+    const whitelist = { type: true };
+
+    const _computeFilters = (data) => {
+      return data.map((item) => {
+        const filters = Object.entries(item)
+          .filter(([key]) => whitelist[key])
+          .reduce((acc, [key, value]) => ({ ...acc, [key]: [value] }), {});
+
+        const childFilters = item.dependencies && item.dependencies.length
+          ? _computeFilters(item.dependencies)
+          : {};
+
+        return deepMerge(filters, childFilters);
+      }).reduce((acc, o) => deepMerge(acc, o), {});
+    };
+
+    const data: any = _computeFilters([this.data]);
+
+    return Object.entries(data)
+      .map(([label, options]) => ({
+        label,
+        options: Array.isArray(options)
+          ? options.filter((el, i, arr) => i === arr.indexOf(el)).map((value: any) => ({ label: value }))
+          : [],
+      }));
   }
 }

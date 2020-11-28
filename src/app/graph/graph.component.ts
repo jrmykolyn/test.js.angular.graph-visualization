@@ -7,6 +7,7 @@ import { GraphService } from '../services/graph/graph.service';
   styleUrls: ['./graph.component.scss']
 })
 export class GraphComponent implements OnInit {
+  public filters: any = this.graphService.computeFilters();
 
   constructor(private graphService: GraphService) { }
 

@@ -1,5 +1,18 @@
 <section>
   <aside id="controls">
+    <form *ngIf="filters.length">
+      <ul *ngFor="let filter of filters">
+        <li>
+          <label>{{ filter.label }}</label>
+        </li>
+        <li *ngFor="let option of filter.options">
+          <label>
+            <input type="checkbox" value="{{ option.label }}" name="{{ option.label }}" id=""/>
+            <span>{{ option.label }}</span>
+          </label>
+        </li>
+      </ul>
+    </form>
   </aside>
   <div id="graph-container"></div>
 </section>
