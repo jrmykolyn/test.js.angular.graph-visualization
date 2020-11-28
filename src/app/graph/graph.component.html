@@ -7,7 +7,7 @@
         </li>
         <li *ngFor="let option of filter.options">
           <label>
-            <input type="checkbox" value="{{ option.label }}" name="{{ option.label }}" id=""/>
+            <input (click)="handleFilterSelection(filter.label, option.label)" type="checkbox" value="{{ option.label }}" name="{{ option.label }}" id=""/>
             <span>{{ option.label }}</span>
           </label>
         </li>

@@ -8,6 +8,7 @@ import { GraphService } from '../services/graph/graph.service';
 })
 export class GraphComponent implements OnInit {
   public filters: any = this.graphService.computeFilters();
+  private selectedFilters: any = {};
 
   constructor(private graphService: GraphService) { }
 
@@ -15,5 +16,25 @@ export class GraphComponent implements OnInit {
 
   ngAfterViewInit() {
     this.graphService.init();
+  }
+
+  handleFilterSelection(type, value) {
+    this.isFilterSelected(type, value)
+      ? this.deselectFilter(type, value)
+      : this.selectFilter(type, value);
+
+      console.log(this.selectedFilters);
+  }
+
+  isFilterSelected(type, value) {
+    return type in this.selectedFilters && this.selectedFilters[type].includes(value);
+  }
+
+  deselectFilter(type, value) {
+    this.selectedFilters[type] = this.selectedFilters[type].filter((el) => el !== value);
+  };
+
+  selectFilter(type, value) {
+    this.selectedFilters[type] = this.selectedFilters[type] ? [...this.selectedFilters[type], value] : [value];
   }
 }
