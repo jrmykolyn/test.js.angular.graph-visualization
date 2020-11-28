@@ -11,6 +11,7 @@ export class GraphDataService {
     const data: any = {
       "id": 0,
       "type": "a",
+      "subType": "foo",
       "dependencies": [
         {
           "id": 1,

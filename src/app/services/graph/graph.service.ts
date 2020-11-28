@@ -68,7 +68,7 @@ export class GraphService {
 
   computeFilters() {
     // TODO: Make configurable or externalize.
-    const whitelist = { type: true };
+    const whitelist = { type: true, subType: true };
 
     const _computeFilters = (data) => {
       return data.map((item) => {
