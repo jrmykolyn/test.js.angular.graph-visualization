@@ -1,52 +1,16 @@
 import { Injectable } from '@angular/core';
+import { GraphDataService } from './graph-data.service';
 
 // TODO: Type.
 declare var sigma: any;
-
-const data: any = {
-  "id": 0,
-  "type": "a",
-  "dependencies": [
-    {
-      "id": 1,
-      "type": "b",
-      "dependencies": [
-        {
-          "id": 2,
-          "type": "b",
-          "dependencies": []
-        },
-        {
-          "id": 3,
-          "type": "b",
-          "dependencies": [
-            {
-              "id": 6,
-              "type": "c"
-            }
-          ]
-        },
-      ]
-    },
-    {
-      "id": 4,
-      "type": "b",
-      "dependencies": []
-    },
-    {
-      "id": 5,
-      "type": "b",
-      "dependencies": []
-    }
-  ],
-};
 
 @Injectable({
   providedIn: 'root'
 })
 export class GraphService {
+  private data: any = this.graphDataService.get();
 
-  constructor() { }
+  constructor(private graphDataService: GraphDataService) { }
 
   init() {
     // Given an array of graph data, return an array of Sigma-type graph 'nodes'.
@@ -73,8 +37,8 @@ export class GraphService {
       }).reduce((acc, arr) => [...acc, ...arr], []);
     };
 
-    const nodes = computeNodes([data]);
-    const edges = computeEdges([data]);
+    const nodes = computeNodes([this.data]);
+    const edges = computeEdges([this.data]);
 
     const s = new sigma({
       graph: {
