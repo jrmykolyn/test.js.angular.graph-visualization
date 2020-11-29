@@ -38,6 +38,8 @@ export class GraphService {
           x:  (x * (i + 1)) + (i * 1),
           y: y * 1,
           size: 0.5,
+          // TODO: Delegate UI concerns.
+          color: item.__meta && item.__meta.isSelected ? '#ff0000' : '#000000',
         };
 
         return [node, ...(item.dependencies && item.dependencies.length ? computeNodes(item.dependencies, i, y + 1) : [])];
