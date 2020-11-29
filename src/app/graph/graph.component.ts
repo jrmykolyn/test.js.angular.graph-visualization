@@ -23,7 +23,7 @@ export class GraphComponent implements OnInit {
       ? this.deselectFilter(type, value)
       : this.selectFilter(type, value);
 
-      console.log(this.selectedFilters);
+      this.graphService.init(this.graphService.filter(this.selectedFilters));
   }
 
   isFilterSelected(type, value) {
