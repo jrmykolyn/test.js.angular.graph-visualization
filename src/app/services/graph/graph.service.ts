@@ -66,6 +66,22 @@ export class GraphService {
     });
   }
 
+  filter(filters) {
+    const _filter = (filters, data) => {
+      return data.map((item) => {
+        return {
+          ...item,
+          ...(item.dependencies && item.dependencies.length ? { dependencies: _filter(filters, item.dependencies) } : {}),
+          __meta: {
+            isSelected: Object.entries(filters).every(([key, value]: [any, any]) => key in item && value.includes(item[key])),
+          },
+        };
+      });
+    };
+
+    return _filter(filters, this.data);
+  }
+
   computeFilters() {
     // TODO: Make configurable or externalize.
     const whitelist = { type: true, subType: true };
