@@ -25,11 +25,11 @@ declare var sigma: any;
   providedIn: 'root'
 })
 export class GraphService {
-  private data: any = this.graphDataService.get();
+  private data: any = [this.graphDataService.get()];
 
   constructor(private graphDataService: GraphDataService) { }
 
-  init() {
+  init(data = this.data) {
     // Given an array of graph data, return an array of Sigma-type graph 'nodes'.
     const computeNodes = (data, x = 0, y = 0) => {
       return data.map((item, i) => {
@@ -54,8 +54,8 @@ export class GraphService {
       }).reduce((acc, arr) => [...acc, ...arr], []);
     };
 
-    const nodes = computeNodes([this.data]);
-    const edges = computeEdges([this.data]);
+    const nodes = computeNodes(data);
+    const edges = computeEdges(data);
 
     const s = new sigma({
       graph: {
@@ -100,7 +100,7 @@ export class GraphService {
       }).reduce((acc, o) => deepMerge(acc, o), {});
     };
 
-    const data: any = _computeFilters([this.data]);
+    const data: any = _computeFilters(this.data);
 
     return Object.entries(data)
       .map(([label, options]) => ({
