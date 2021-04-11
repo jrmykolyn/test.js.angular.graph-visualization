@@ -9,7 +9,7 @@
       "type": "library"
     },
     {
-      "name": "my-encription-lib",
+      "name": "my-encryption-lib",
       "type": "library"
     },
     {
@@ -34,8 +34,8 @@
           ]
         },
         {
-          "name": "my-encription-lib",
-          "id": "my-encription-lib",
+          "name": "my-encryption-lib",
+          "id": "my-encryption-lib",
           "dependencies": []
         }
       ]
@@ -53,9 +53,9 @@
         }
       ]
     },
-    "my-encription-lib": {
-      "name": "my-encription-lib",
-      "id": "my-encription-lib",
+    "my-encryption-lib": {
+      "name": "my-encryption-lib",
+      "id": "my-encryption-lib",
       "dependencies": []
     }
   },
