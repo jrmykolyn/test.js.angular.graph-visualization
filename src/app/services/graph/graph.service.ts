@@ -9,7 +9,7 @@ declare var sigma: any;
   providedIn: 'root'
 })
 export class GraphService {
-  private data: any = [this.graphDataService.get()];
+  private data: any = this.graphDataService.get();
 
   constructor(private graphDataService: GraphDataService) { }
 
