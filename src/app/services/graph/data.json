@@ -25,20 +25,24 @@
         {
           "name": "my-auth-lib",
           "id": "my-auth-lib",
+          "maintainer": "Group A",
           "dependencies": []
         },
         {
           "name": "my-user-lib",
           "id": "my-user-lib",
+          "maintainer": "Group C",
           "dependencies": [
             {
               "name": "my-user-api",
               "id": "my-user-api",
+              "maintainer": "Group B",
               "dependencies": []
             },
             {
               "name": "my-preferences-api",
               "id": "my-preferences-api",
+              "maintainer": "Group B",
               "dependencies": []
             }
           ]
@@ -46,6 +50,7 @@
         {
           "name": "my-encryption-lib",
           "id": "my-encryption-lib",
+          "maintainer": "Group D",
           "dependencies": []
         }
       ]
