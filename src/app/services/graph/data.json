@@ -23,12 +23,22 @@
       "id": "my-cool-app",
       "dependencies": [
         {
+          "name": "my-auth-lib",
+          "id": "my-auth-lib",
+          "dependencies": []
+        },
+        {
           "name": "my-user-lib",
           "id": "my-user-lib",
           "dependencies": [
             {
               "name": "my-user-api",
               "id": "my-user-api",
+              "dependencies": []
+            },
+            {
+              "name": "my-preferences-api",
+              "id": "my-preferences-api",
               "dependencies": []
             }
           ]
