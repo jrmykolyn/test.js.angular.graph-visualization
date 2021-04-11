@@ -1,0 +1,70 @@
+{
+  "artifacts": [
+    {
+      "name": "my-cool-app",
+      "type": "application"
+    },
+    {
+      "name": "my-user-lib",
+      "type": "library"
+    },
+    {
+      "name": "my-encription-lib",
+      "type": "library"
+    },
+    {
+      "name": "my-user-api",
+      "type": "api"
+    }
+  ],
+  "application": {
+    "my-cool-app": {
+      "name": "my-cool-app",
+      "id": "my-cool-app",
+      "dependencies": [
+        {
+          "name": "my-user-lib",
+          "id": "my-user-lib",
+          "dependencies": [
+            {
+              "name": "my-user-api",
+              "id": "my-user-api",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "name": "my-encription-lib",
+          "id": "my-encription-lib",
+          "dependencies": []
+        }
+      ]
+    }
+  },
+  "library": {
+    "my-user-lib": {
+      "name": "my-user-lib",
+      "id": "my-user-lib",
+      "dependencies": [
+        {
+          "name": "my-user-api",
+          "id": "my-user-api",
+          "dependencies": []
+        }
+      ]
+    },
+    "my-encription-lib": {
+      "name": "my-encription-lib",
+      "id": "my-encription-lib",
+      "dependencies": []
+    }
+  },
+  "api": {
+    "my-user-api": {
+      "name": "my-user-api",
+      "id": "my-user-api",
+      "dependencies": []
+    }
+  }
+}
+
